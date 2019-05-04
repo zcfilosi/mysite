@@ -19,12 +19,25 @@ def todoView(request, par_id = None):
         )
 
 def addTodoView(request):
-    new_item = todoItem(content = request.POST['content'], parent_id = request.POST['parent_id'])
+    new_item = todoItem(content = request.POST['content'], parent_id = request.POST['parent_id'], description = request.POST['description'])
     new_item.save()
     return HttpResponseRedirect('/todo/'+ request.POST['parent_id'])
 
 def removeTodoView(request, todo_id):
     deleteItem = todoItem.objects.get(id = todo_id)
-    delItemId = deleteItem.parent_id
+    delItemParentId = deleteItem.parent_id
+    delItemId = deleteItem.id
     deleteItem.delete()
-    return HttpResponseRedirect('/todo/'+ str(delItemId))
+    cascadeDelete(delItemId)
+    return HttpResponseRedirect('/todo/'+ str(delItemParentId))
+
+
+def cascadeDelete(parent_id):
+    child_list = list(todoItem.objects.filter(parent_id = parent_id))
+    if not child_list:
+        return None
+    else:
+        for item in child_list:
+            this_id = item.id
+            item.delete()
+            cascadeDelete(this_id)
