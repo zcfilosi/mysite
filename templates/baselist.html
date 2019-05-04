@@ -1,21 +1,31 @@
 {% extends 'todo.html' %}
 
 {% block content %}
-<ul>
+<ul style="list-style:none">
     {% for todo_item in all_items %}
       <li>
         <input type="checkbox">
+        <script type="text/javascript">
+          function showDescription(id){
+            alert(document.getElementById('descText-'+id).value)
+          }
+        </script>
         <a href="/todo/{{todo_item.id}}">{{ todo_item.content }}</a>
         <form class="removeTodoItem" action="/removeTodo/{{todo_item.id}}"
         style = "display:inline"
         method="post"> {% csrf_token %}
-          <input type="submit" name="" class="button" value="Delete">
+          <input type="submit" name="" class="delButton" value="Delete">
         </form>
+        <input type="hidden" id="descText-{{todo_item.id}}"name="" value="{{todo_item.description}}">
+        <button type="button" onclick="showDescription({{todo_item.id}})" class ="button" name="button">Description</button>
       </li>
     {% endfor %}
 </ul>
-<form class="addTodoForm" action="/addTodo/" method="post"> {% csrf_token %}
-  <input type="text" name="content" value="">
+<form class="addTodoForm" action="/addTodo/" id="addForm" method="post"> {% csrf_token %}
+  <input type="text" name="content" placeholder="Task Name" value="">
+  <br/>
+  <textarea name="description" form = "addForm" maxlength = "200" rows="4" cols="10" placeholder="Task Description ..."></textarea>
+  <br/>
   <input type="hidden" name="parent_id" value="{{parent_id}}">
   <input type="submit" name="" value="Add Item">
 </form>
