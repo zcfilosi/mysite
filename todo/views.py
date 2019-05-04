@@ -5,6 +5,9 @@ from .models import todoItem
 # Create your views here.
 
 
+def homeView(request):
+    return HttpResponse("hello")
+
 
 def todoView(request, par_id = None):
     if par_id is None:
