@@ -1,0 +1,25 @@
+{% extends 'todo.html' %}
+
+{% block content %}
+<ul>
+    {% for todo_item in all_items %}
+      <li>
+        <input type="checkbox">
+        <a href="/todo/{{todo_item.id}}">{{ todo_item.content }}</a>
+        <form class="removeTodoItem" action="/removeTodo/{{todo_item.id}}"
+        style = "display:inline"
+        method="post"> {% csrf_token %}
+          <input type="submit" name="" class="button" value="Delete">
+        </form>
+      </li>
+    {% endfor %}
+</ul>
+<form class="addTodoForm" action="/addTodo/" method="post"> {% csrf_token %}
+  <input type="text" name="content" value="">
+  <input type="hidden" name="parent_id" value="{{parent_id}}">
+  <input type="submit" name="" value="Add Item">
+</form>
+<form class="" action="/todo/0" method="post">{% csrf_token %}
+  <input type="submit" name="" value="return home">
+</form>
+{% endblock %}
