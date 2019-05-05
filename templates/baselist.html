@@ -4,7 +4,7 @@
 <ul style="list-style:none">
     {% for todo_item in all_items %}
       <li>
-        <input type="checkbox">
+        <input type="checkbox" id ="{{todo_item.id}}">
         <script type="text/javascript">
           function showDescription(id){
             alert(document.getElementById('descText-'+id).value)
