@@ -11,7 +11,7 @@ def homeView(request):
 # DONE
 def todoView(request, par_id = None):
     #check and see if base object exists, this will not be displayed, but serve as the parent object of all
-    if(!todoItem.objects.filter(id = 0).exists()):
+    if( not todoItem.objects.filter(id = 0).exists()):
         c = todoItem(id = 0, content = '', parent_id = None, description='' )
         c.save()
         parent_item = c
@@ -30,28 +30,27 @@ def todoView(request, par_id = None):
         )
 # need to implement new parent
 def addTodoView(request):
-    if request.POST['parent_id'] is '' or request.POST['parent_id'] is 0 or request.POST['parent_id'] is None:
-        parObj = todoItem.objects.get(id = request.POST['parent_id'])
-        new_item = todoItem(content = request.POST['content'], parent_id = request.POST['parent_id'], description = request.POST['description'])
-        new_item.save()
-        return HttpResponseRedirect('/todo/'+ request.POST['parent_id'])
+    parObj = todoItem.objects.get(id = request.POST['parent_id'])
+    new_item = todoItem(content = request.POST['content'], parent_id = parObj, description = request.POST['description'])
+    new_item.save()
+    return HttpResponseRedirect('/todo/'+ request.POST['parent_id'])
 
 # need to implement new parent
 def removeTodoView(request, todo_id):
     deleteItem = todoItem.objects.get(id = todo_id)
-    delItemParentId = deleteItem.parent_id
+    delItemParentId = deleteItem.parent_id.id
     delItemId = deleteItem.id
     deleteItem.delete()
-    cascadeDelete(delItemId)
+    # cascadeDelete(delItemId) # commented out for now
     return HttpResponseRedirect('/todo/'+ str(delItemParentId))
 
 #delete when done with new parent, as cascade delete handled by db
-def cascadeDelete(parent_id):
-    child_list = list(todoItem.objects.filter(parent_id = parent_id))
-    if not child_list:
-        return None
-    else:
-        for item in child_list:
-            this_id = item.id
-            item.delete()
-            cascadeDelete(this_id)
+# def cascadeDelete(parent_id):
+#     child_list = list(todoItem.objects.filter(parent_id = parent_id))
+#     if not child_list:
+#         return None
+#     else:
+#         for item in child_list:
+#             this_id = item.id
+#             item.delete()
+#             cascadeDelete(this_id)
