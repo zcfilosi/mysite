@@ -9,7 +9,7 @@ def homeView(request):
     return HttpResponse("hello")
 
 # DONE
-def todoView(request, par_id = None):
+def todoView(request, par_id = 0):
     #check and see if base object exists, this will not be displayed, but serve as the parent object of all
     if( not todoItem.objects.filter(id = 0).exists()):
         c = todoItem(id = 0, content = '', parent_id = None, description='' )
