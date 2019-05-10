@@ -14,6 +14,7 @@
         <form class="removeTodoItem" action="/removeTodo/{{todo_item.id}}"
         style = "display:inline"
         method="post"> {% csrf_token %}
+          <input type="hidden" class="checkedList" name="" value="">
           <input type="submit" name="" class="delButton" value="Delete">
         </form>
         <input type="hidden" id="descText-{{todo_item.id}}"name="" value="{{todo_item.description}}">
@@ -27,9 +28,11 @@
   <textarea name="description" form = "addForm" maxlength = "200" rows="4" cols="10" placeholder="Task Description ..."></textarea>
   <br/>
   <input type="hidden" name="parent_id" value="{{parent_id}}">
+  <input type="hidden" class="checkedList" name="" value="">
   <input type="submit" name="" value="Add Item">
 </form>
 <form class="" action="/todo/0" method="post">{% csrf_token %}
   <input type="submit" name="" value="return home">
+  <input type="hidden" class="checkedList" name="" value="">
 </form>
 {% endblock %}
