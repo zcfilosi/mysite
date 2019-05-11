@@ -1,67 +1,85 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Todo List Application</title>
     <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    h1{
-      color: #f2f2f2;
-    }
-    .button {
-      background-color: #4CAF50; /* Green */
-      border: none;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 12px;
-      cursor: pointer;
-      border-radius: 20%;
-    }
-    .delButton {
-      background-color: #B22222; /* Green */
-      border: none;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 12px;
-      cursor: pointer;
-      border-radius: 20%;
-    }
-    .topnav {
-      overflow: hidden;
-      background-color: #333;
-    }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      h1{
+        color: #f2f2f2;
+      }
+      .content_div_outer{
+        line-height: 1.5;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        margin: auto;
+        width: 100%;
+        padding: 10px;
+      }
+      .content_div_inner{
+        display: inline-block;
+        border: 3px solid #333;
+        box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.3);
+        border-radius: 20%;
+        padding: 5%;
+      }
+      .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 20%;
+      }
+      .delButton {
+        background-color: #B22222; /* Green */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 20%;
+      }
+      .topnav {
+        overflow: hidden;
+        background-color: #333;
+      }
 
-    .topnav a {
-      float: left;
-      color: #f2f2f2;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 17px;
-    }
+      .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
 
-    .topnav a:hover {
-      background-color: #ddd;
-      color: black;
-    }
+      .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+      }
 
-    .topnav a.active {
-      background-color: #4CAF50;
-      color: white;
-    }
+      .topnav a.active {
+        background-color: #4CAF50;
+        color: white;
+      }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
     <body>
 
     <div class="topnav">
-      <h1>This is the Todo Page</h1>
+      <h1>Todo Lists</h1>
       <a class="active" href="#home">Home</a>
       <a href="#news">News</a>
       <a href="#contact">Contact</a>
