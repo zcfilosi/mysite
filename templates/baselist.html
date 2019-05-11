@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="content_div_outer">
-  <div class="content_div_inner">
+  <div class="content_div_inner jumbotron">
     <script type="text/javascript">
       $( document ).ready(function() {
         var checked = {}
@@ -51,9 +51,9 @@
         {% endfor %}
     </ul>
     <form class="addTodoForm" action="/addTodo/" id="addForm" method="post"> {% csrf_token %}
-      <input type="text" name="content" placeholder="Task Name" value="">
+      <input type="text" name="content" placeholder="Task Name" value="" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
       <br/>
-      <textarea name="description" form = "addForm" maxlength = "200" rows="4" cols="10" placeholder="Task Description ..."></textarea>
+      <textarea name="description" form = "addForm" class="form-control" aria-label="With textarea" maxlength = "200" rows="4" cols="10" placeholder="Task Description ..."></textarea>
       <br/>
       <input type="hidden" name="parent_id" value="{{parent_id}}">
       <input type="hidden" class="checkedList" name="" value="">
