@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponseRedirect
 from .models import todoItem
+from .serializers import todoItemSerializer
+
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
@@ -44,6 +47,12 @@ def removeTodoView(request, todo_id):
     # cascadeDelete(delItemId) # commented out for now
     return HttpResponseRedirect('/todo/'+ str(delItemParentId))
 
+#@csrf_exempt
+def get_data(request):
+	data = todoItem.objects.all()
+	if request.method == 'GET':
+		serializer = todoItemSerializer(data, many=True)
+		return JsonResponse(serializer.data, safe=False)
 #delete when done with new parent, as cascade delete handled by db
 # def cascadeDelete(parent_id):
 #     child_list = list(todoItem.objects.filter(parent_id = parent_id))

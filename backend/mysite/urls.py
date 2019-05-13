@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from todo.views import todoView, addTodoView, removeTodoView, homeView
+from todo.views import todoView, addTodoView, removeTodoView, homeView, get_data
+from django.conf.urls import url
+from django.views.generic.base import TemplateView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', homeView),
@@ -23,5 +26,7 @@ urlpatterns = [
     path('todo/<int:par_id>', todoView),
     path('addTodo/', addTodoView),
     path('removeTodo/<int:todo_id>', removeTodoView),
+    url(r'^getData/', get_data),
+    url(r'^.*', TemplateView.as_view(template_name="home.html"), name="homes"),
 
 ]
