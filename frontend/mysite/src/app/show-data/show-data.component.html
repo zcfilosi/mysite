@@ -1,5 +1,24 @@
 
   <!-- show-data works! -->
-  	<li *ngFor="let d of data">
+  	<!-- <li *ngFor="let d of data">
   		{{ d.content }}: {{ d.description }}
-  	</li>
+  	</li> -->
+
+    <li *ngFor="let d of data">
+      <input type="checkbox" class="checkItem" id ="{{d.id}}">
+      <script type="text/javascript">
+        function showDescription(id){
+          alert(document.getElementById('descText-'+id).value)
+        }
+      </script>
+      <a href="/todo/{{d.id}}">{{ d.content }}</a>
+      <form class="removeTodoItem" action="/removeTodo/{{d.id}}"
+      style = "display:inline"
+      method="post">
+        <input type="hidden" class="checkedList" name="" value="">
+        <input type="hidden" class="uncheckedList" name="" value="">
+        <input type="submit" name="" class="delButton" value="Delete">
+      </form>
+      <input type="hidden" id="descText-{{d.id}}"name="" value="{{d.description}}">
+      <button type="button" onclick="showDescription({{d.id}})" class ="button" name="button">Description</button>
+    </li>
