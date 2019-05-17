@@ -3,8 +3,10 @@ from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponseRedirect
 from .models import todoItem
 from .serializers import todoItemSerializer
-
+from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
+
 # Create your views here.
 
 
@@ -48,11 +50,32 @@ def removeTodoView(request, todo_id):
     return HttpResponseRedirect('/todo/'+ str(delItemParentId))
 
 #@csrf_exempt
-def get_data(request):
-	data = todoItem.objects.all()
-	if request.method == 'GET':
-		serializer = todoItemSerializer(data, many=True)
-		return JsonResponse(serializer.data, safe=False)
+def get_data(request, par_id = 0):
+    data = None
+    baseItem = True
+
+    if( not todoItem.objects.filter(id = 0).exists()):
+        c = todoItem(id = 0, content = '', parent_id = None, description='' )
+        c.save()
+        parent_item = c
+    else:
+        parent_item = todoItem.objects.get(id = par_id)
+
+
+    if par_id is None:
+        data = list(todoItem.objects.filter(parent_id = parent_item))
+
+    else:
+        data = list(todoItem.objects.filter(parent_id = parent_item))
+        baseItem = False
+
+    if request.method == 'GET':
+        all_items = serializers.serialize('json', data)
+        serializer = {
+            "data": all_items,
+            "par_id": str(parent_item)
+        }
+        return JsonResponse(serializer, safe=False)
 #delete when done with new parent, as cascade delete handled by db
 # def cascadeDelete(parent_id):
 #     child_list = list(todoItem.objects.filter(parent_id = parent_id))

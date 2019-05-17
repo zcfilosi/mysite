@@ -1,1 +1,3 @@
 https://www.techiediaries.com/angular-tutorial/
+
+always remember to clear the cache!, hold control and hit the reload button to clear cache and show new contents

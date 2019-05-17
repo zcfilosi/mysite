@@ -3,8 +3,8 @@
   	<!-- <li *ngFor="let d of data">
   		{{ d.content }}: {{ d.description }}
   	</li> -->
-
-    <li *ngFor="let d of data">
+  <ul style="list-style:none">
+    <li *ngFor="let d of serializer.data">
       <input type="checkbox" class="checkItem" id ="{{d.id}}">
       <script type="text/javascript">
         function showDescription(id){
@@ -20,5 +20,22 @@
         <input type="submit" name="" class="delButton" value="Delete">
       </form>
       <input type="hidden" id="descText-{{d.id}}"name="" value="{{d.description}}">
-      <button type="button" onclick="showDescription({{d.id}})" class ="button" name="button">Description</button>
+      <button type="button"  class ="button" name="button">Description</button>
     </li>
+
+  </ul>
+    <form class="addTodoForm" action="/addTodo/" id="addForm" method="post">
+      <input type="text" name="content" placeholder="Task Name" value="" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+      <br/>
+      <textarea name="description" form = "addForm" class="form-control" aria-label="With textarea" maxlength = "200" rows="4" cols="10" placeholder="Task Description ..."></textarea>
+      <br/>
+      <input type="hidden" name="parent_id" value="parent_home">
+      <input type="hidden" class="checkedList" name="" value="">
+      <input type="hidden" class="uncheckedList" name="" value="">
+      <input type="submit" name="" value="Add Item">
+    </form>
+    <form class="" action="/todo/0" method="post">
+      <input type="submit" name="" value="return home">
+      <input type="hidden" class="checkedList" name="" value="">
+      <input type="hidden" class="uncheckedList" name="" value="">
+    </form>

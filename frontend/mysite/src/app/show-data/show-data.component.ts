@@ -7,16 +7,16 @@ import { Http } from '@angular/http';
   styleUrls: ['./show-data.component.css']
 })
 export class ShowDataComponent implements OnInit {
-  data: any
+  serializer: any
   private req: any
   url: string = '/getData/'
 
   constructor(private http:Http) { }
 
   ngOnInit() {
-  	this.req = this.http.get(this.url).subscribe(data => {
-      console.log(data.json())
-      this.data = data.json() as [any]
+  	this.req = this.http.get(this.url).subscribe(serializer => {
+      console.log(serializer.json())
+      this.serializer = serializer.json() as [any]
     })
   }
 

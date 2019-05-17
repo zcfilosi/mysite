@@ -1,36 +1,8 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!-- <h1>This Content</h1>
-<app-show-data></app-show-data> -->
-
-
 <div class="content_div_outer">
   <div class="content_div_inner jumbotron">
-    <script type="text/javascript">
-      $( document ).ready(function() {
-        var checked = {}
-          $('.checkItem').mousedown(function(){
-            if($(this).prop('checked')){
-              checked[$(this).attr('id')]='unchecked'
-              $(this).prop('checked',false)
-            }else{
-              checked[$(this).attr('id')]='checked'
-              $(this).prop('checked',true)
-            }
-            var checkedList = []
-            var uncheckedList = []
-            for(var i in checked){
-              if(checked[i] == 'checked'){
-                checkedList.push(i)
-              }else{
-                uncheckedList.push(i)
-              }
-            }
-            alert(JSON.stringify(checked))
-          });
-       });
-    </script>
-    <ul style="list-style:none">
-        {% for todo_item in all_items %}
+    <!-- {{serializer.par_id}} -->
+      <app-show-data></app-show-data>
+        <!-- {% for todo_item in all_items %}
           <li>
             <input type="checkbox" class="checkItem" id ="{{todo_item.id}}">
             <script type="text/javascript">
@@ -49,22 +21,6 @@
             <input type="hidden" id="descText-{{todo_item.id}}"name="" value="{{todo_item.description}}">
             <button type="button" onclick="showDescription({{todo_item.id}})" class ="button" name="button">Description</button>
           </li>
-        {% endfor %}
-    </ul>
-    <form class="addTodoForm" action="/addTodo/" id="addForm" method="post"> {% csrf_token %}
-      <input type="text" name="content" placeholder="Task Name" value="" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-      <br/>
-      <textarea name="description" form = "addForm" class="form-control" aria-label="With textarea" maxlength = "200" rows="4" cols="10" placeholder="Task Description ..."></textarea>
-      <br/>
-      <input type="hidden" name="parent_id" value="{{parent_id}}">
-      <input type="hidden" class="checkedList" name="" value="">
-      <input type="hidden" class="uncheckedList" name="" value="">
-      <input type="submit" name="" value="Add Item">
-    </form>
-    <form class="" action="/todo/0" method="post">{% csrf_token %}
-      <input type="submit" name="" value="return home">
-      <input type="hidden" class="checkedList" name="" value="">
-      <input type="hidden" class="uncheckedList" name="" value="">
-    </form>
+        {% endfor %} -->
   </div>
 </div>
